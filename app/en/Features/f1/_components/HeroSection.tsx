@@ -1,6 +1,5 @@
 "use client";
 
-import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Zap, CheckCircle, TrendingUp, Shield } from "lucide-react";
 import Image from "next/image";
@@ -8,7 +7,7 @@ import Image from "next/image";
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-    <BackgroundBeams />
+      
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="pt-16 pb-20 sm:pt-24 sm:pb-24">
           <div className="text-center mb-16">

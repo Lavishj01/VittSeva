@@ -192,9 +192,9 @@ export default function Navigation() {
             as="button"
             onClick={handleContactClick} 
             variant="gradient"
-            className="bg-primary hover:bg-primary/90 text-white"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
           >
-            Book a  Free Consultation
+            Book a Free Consultation
           </NavbarButton>
         </div>
       </CustomNavBody>
@@ -251,7 +251,7 @@ export default function Navigation() {
                 as="button"
                 onClick={handleContactClick} 
                 variant="gradient" 
-                className="w-full bg-primary hover:bg-primary/90 text-white"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors"
               >
                 Book a Free Consultation
               </NavbarButton>

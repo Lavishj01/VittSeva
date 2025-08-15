@@ -4,94 +4,93 @@ import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import { 
   Mail, Phone, MapPin, MessageCircle, 
-  ArrowRight, Calendar, Clock, Video, Users, Globe, Headphones
+  ArrowRight, Calendar, Clock, Video, Users, Globe, Headphones, IndianRupee
 } from "lucide-react"
 import WorldMap from "@/components/ui/world-map"
 import { Boxes } from "@/components/ui/background-boxes"
-import { CALENDLY_URL, EMAIL, SALES_EMAIL } from "@/constants/constants"
 
-// Global office locations for the world map
+// VittSeva service locations for the world map
 const dots = [
   {
-    start: { lat: 37.7749, lng: -122.4194 }, // San Francisco Bay Area (HQ)
-    end: { lat: 12.9716, lng: 77.5946 }, // Jaipur
+    start: { lat: 26.9124, lng: 75.7873 }, // Jaipur (HQ)
+    end: { lat: 28.6139, lng: 77.2090 }, // Delhi
   },
   {
-    start: { lat: 37.7749, lng: -122.4194 }, // San Francisco Bay Area
-    end: { lat: 14.0444, lng: 31.2357 }, // Cairo
+    start: { lat: 26.9124, lng: 75.7873 }, // Jaipur
+    end: { lat: 19.0760, lng: 72.8777 }, // Mumbai
   },
   {
-    start: { lat: 37.7749, lng: -122.4194 }, // San Francisco Bay Area
-    end: { lat: -44.7479, lng: 24.2293 }, // South Africa (Pretoria)
+    start: { lat: 26.9124, lng: 75.7873 }, // Jaipur
+    end: { lat: 12.9716, lng: 77.5946 }, // Bangalore
   },
   {
-    start: { lat: 37.7749, lng: -122.4194 }, // San Francisco Bay Area
-    end: { lat: 20.7490, lng: -81.3880 }, // Atlanta
+    start: { lat: 26.9124, lng: 75.7873 }, // Jaipur
+    end: { lat: 17.3850, lng: 78.4867 }, // Hyderabad
   },
   {
-    start: { lat: 37.7749, lng: -122.4194 }, // San Francisco Bay Area
-    end: { lat: -50.8688, lng: 151.2093 }, // Sydney
+    start: { lat: 26.9124, lng: 75.7873 }, // Jaipur
+    end: { lat: 22.5726, lng: 88.3639 }, // Kolkata
   }
 ]
 
-const contactInfo = [
+const vitSevaContactInfo = [
   {
     icon: Mail,
-    label: "Business Email",
-    value: EMAIL,
-    href: `mailto:${EMAIL}`,
-    description: "For partnerships & inquiries"
+    label: "VittSeva Business Email",
+    value: "info@vittseva.com",
+    href: "mailto:info@vittseva.com",
+    description: "For financial consultations & inquiries"
   },
   {
     icon: Phone,
-    label: "Sales Hotline",
-    value: "+1 (470) 209-9781",
-    href: "tel:+14702099781",
-    description: "24/7 sales support available"
+    label: "VittSeva Advisory Hotline",
+    value: "+91 141 XXX XXXX",
+    href: "tel:+91141XXXXXXX",
+    description: "Financial advisory support available"
   },
   {
     icon: MapPin,
-    label: "Headquarters",
-    value: "San Francisco Bay Area, CA",
-    href: "https://maps.google.com/?q=San+Francisco+Bay+Area,+CA",
-    description: "Headquarters"
+    label: "VittSeva Headquarters",
+    value: "Jaipur, Rajasthan, India",
+    href: "https://maps.google.com/?q=Jaipur,+Rajasthan,+India",
+    description: "Main office and consultation center"
   }
 ]
 
-const supportChannels = [
+const vitSevaServices = [
   {
     icon: Users,
-    title: "Enterprise Sales",
-    description: "Dedicated team for enterprise solutions",
-    action: "Contact Sales",
-    contact: SALES_EMAIL
+    title: "VittSeva Investment Advisory",
+    description: "Dedicated team for wealth management and investment planning",
+    action: "Book Investment Consultation",
+    contact: "investments@vittseva.com"
   },
   {
     icon: Headphones,
-    title: "Technical Support",
-    description: "24/7 technical assistance",
-    action: "Get Support",
-    contact: EMAIL
+    title: "VittSeva Insurance Support",
+    description: "Comprehensive insurance advisory and claim assistance",
+    action: "Get Insurance Quote",
+    contact: "insurance@vittseva.com"
   },
   {
     icon: Globe,
-    title: "Global Partnerships",
-    description: "Strategic partnerships and integrations",
-    action: "Partner with us",
-    contact: EMAIL
+    title: "VittSeva NRI Services",
+    description: "Specialized financial services for Non-Resident Indians",
+    action: "Connect with NRI Desk",
+    contact: "nri@vittseva.com"
   }
 ]
 
-const globalOffices = [
-  { city: "San Francisco Bay Area", country: "USA", type: "Headquarters" },
-  { city: "Jaipur", country: "India", type: "Development Center" },
-  { city: "Cairo", country: "Egypt", type: "Regional Office" },
-  { city: "Cape Town", country: "South Africa", type: "Regional Office" },
-  { city: "Atlanta", country: "USA", type: "Regional Office" },
-  { city: "Sydney", country: "Australia", type: "Regional Office" }
+const vitSevaLocations = [
+  { city: "Jaipur", state: "Rajasthan", type: "Headquarters & Main Office" },
+  { city: "Delhi", state: "Delhi", type: "Regional Office" },
+  { city: "Mumbai", state: "Maharashtra", type: "Financial Hub" },
+  { city: "Bangalore", state: "Karnataka", type: "Technology Center" },
+  { city: "Hyderabad", state: "Telangana", type: "Service Center" },
+  { city: "Kolkata", state: "West Bengal", type: "Regional Office" }
 ]
 
-export default function Contact() {
+export default function VittSevaContact() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
@@ -129,28 +128,33 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-4">
-            <MessageCircle className="w-5 h-5 text-primary" />
-            <span className="text-sm font-medium text-primary uppercase tracking-wider">Get In Touch</span>
+            <MessageCircle className="w-5 h-5 text-green-500" />
+            <IndianRupee className="w-4 h-4 text-blue-600" />
+            <span className="text-sm font-medium uppercase tracking-wider">
+              <span className="text-green-500">VittSeva</span> <span className="text-blue-600">Connect</span>
+            </span>
           </motion.div>
           
           <motion.h2
             variants={itemVariants}
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground"
           >
-            Ready to Transform
-            <span className="text-primary"> Your Operations?</span>
+            Ready to Transform Your
+            <span className="block">
+              <span className="text-green-500">Financial</span> <span className="text-blue-600">Future with VittSeva?</span>
+            </span>
           </motion.h2>
           
           <motion.p
             variants={itemVariants}
             className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
           >
-            Let&apos;s discuss how Oxmaint AI can revolutionize your maintenance operations. 
-            Our experts are ready to help you implement cutting-edge AI solutions.
+            Let&apos;s discuss how <span className="text-green-500 font-semibold">VittSeva</span> can optimize your financial journey. 
+            Our expert advisors are ready to help you achieve your wealth management goals with personalized solutions.
           </motion.p>
         </motion.div>
 
-        {/* Global Presence World Map */}
+        {/* VittSeva India Presence Map */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -159,10 +163,10 @@ export default function Contact() {
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Global <span className="text-primary">Presence</span>
+              <span className="text-green-500">VittSeva</span> <span className="text-blue-600">Pan-India</span> Presence
             </h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Serving clients worldwide with local expertise and 24/7 support across multiple time zones
+              Serving clients across India with local expertise and personalized financial advisory services in multiple cities
             </p>
           </motion.div>
           
@@ -170,22 +174,22 @@ export default function Contact() {
             variants={itemVariants}
             className="relative bg-card/20 backdrop-blur-sm rounded-2xl shadow-lg p-8 border border-border max-w-6xl mx-auto"
           >
-            <WorldMap dots={dots} lineColor="hsl(var(--primary))" />
+            <WorldMap dots={dots} lineColor="#10b981" />
             
-            {/* Office locations grid */}
+            {/* VittSeva office locations grid */}
             <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {globalOffices.map((office, index) => (
+              {vitSevaLocations.map((office, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 + index * 0.1 }}
-                  className="text-center p-4 bg-card/10 backdrop-blur-sm rounded-lg hover:bg-primary/10 transition-colors"
+                  className="text-center p-4 bg-gradient-to-br from-green-500/10 to-blue-600/10 backdrop-blur-sm rounded-lg hover:from-green-500/20 hover:to-blue-600/20 transition-colors"
                 >
-                  <div className="w-2 h-2 bg-primary rounded-full mx-auto mb-2"></div>
+                  <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-600 rounded-full mx-auto mb-2"></div>
                   <div className="font-semibold text-sm text-foreground">{office.city}</div>
-                  <div className="text-xs text-muted-foreground">{office.country}</div>
-                  <div className="text-xs text-primary font-medium mt-1">{office.type}</div>
+                  <div className="text-xs text-muted-foreground">{office.state}</div>
+                  <div className="text-xs text-green-500 font-medium mt-1">{office.type}</div>
                 </motion.div>
               ))}
             </div>
@@ -193,7 +197,7 @@ export default function Contact() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-          {/* Contact Information */}
+          {/* VittSeva Contact Information */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -201,9 +205,11 @@ export default function Contact() {
             className="space-y-8"
           >
             <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold mb-6 text-foreground">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-6 text-foreground">
+                <span className="text-green-500">VittSeva</span> Contact Information
+              </h3>
               <div className="space-y-6">
-                {contactInfo.map((info, index) => (
+                {vitSevaContactInfo.map((info, index) => (
                   <motion.a
                     key={info.label}
                     href={info.href}
@@ -211,44 +217,46 @@ export default function Contact() {
                     rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     variants={itemVariants}
                     whileHover={{ scale: 1.02 }}
-                    className="flex items-center gap-4 p-4 bg-card/20 backdrop-blur-sm border border-border rounded-xl hover:border-primary transition-all duration-300 group"
+                    className="flex items-center gap-4 p-4 bg-card/20 backdrop-blur-sm border border-border rounded-xl hover:border-green-500/30 transition-all duration-300 group"
                   >
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <info.icon className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-500/10 to-blue-600/10 rounded-lg flex items-center justify-center group-hover:from-green-500/20 group-hover:to-blue-600/20 transition-colors">
+                      <info.icon className="w-6 h-6 text-green-500" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground mb-1">{info.label}</h4>
                       <p className="text-muted-foreground text-sm mb-1">{info.value}</p>
                       <p className="text-xs text-muted-foreground">{info.description}</p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-muted-foreground ml-auto group-hover:text-primary transition-colors" />
+                    <ArrowRight className="w-4 h-4 text-muted-foreground ml-auto group-hover:text-green-500 transition-colors" />
                   </motion.a>
                 ))}
               </div>
             </motion.div>
 
-            {/* Support Channels */}
+            {/* VittSeva Service Channels */}
             <motion.div variants={itemVariants}>
-              <h3 className="text-2xl font-bold mb-6 text-foreground">How Can We Help?</h3>
+              <h3 className="text-2xl font-bold mb-6 text-foreground">
+                How Can <span className="text-green-500">VittSeva</span> Help You?
+              </h3>
               <div className="space-y-4">
-                {supportChannels.map((channel, index) => (
+                {vitSevaServices.map((service, index) => (
                   <motion.div
-                    key={channel.title}
+                    key={service.title}
                     whileHover={{ scale: 1.02 }}
-                    className="p-4 bg-card/20 backdrop-blur-sm border border-border rounded-xl hover:border-primary/30 transition-all duration-300 group"
+                    className="p-4 bg-card/20 backdrop-blur-sm border border-border rounded-xl hover:border-blue-600/30 transition-all duration-300 group"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <channel.icon className="w-5 h-5 text-primary" />
+                      <div className="w-10 h-10 bg-gradient-to-r from-green-500/10 to-blue-600/10 rounded-lg flex items-center justify-center group-hover:from-green-500/20 group-hover:to-blue-600/20 transition-colors">
+                        <service.icon className="w-5 h-5 text-blue-600" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-foreground mb-1">{channel.title}</h4>
-                        <p className="text-sm text-muted-foreground mb-2">{channel.description}</p>
+                        <h4 className="font-semibold text-foreground mb-1">{service.title}</h4>
+                        <p className="text-sm text-muted-foreground mb-2">{service.description}</p>
                         <a 
-                          href={`mailto:${channel.contact}`}
-                          className="text-sm text-primary hover:text-primary/80 font-medium"
+                          href={`mailto:${service.contact}`}
+                          className="text-sm text-green-500 hover:text-green-600 font-medium"
                         >
-                          {channel.action} →
+                          {service.action} →
                         </a>
                       </div>
                     </div>
@@ -258,7 +266,7 @@ export default function Contact() {
             </motion.div>
           </motion.div>
 
-          {/* Demo Scheduling Card */}
+          {/* VittSeva Consultation Booking Card */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -269,37 +277,39 @@ export default function Contact() {
               className="p-8 h-full bg-card/10 backdrop-blur-sm rounded-2xl border border-border flex flex-col justify-center items-center"
             >
               <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Calendar className="w-8 h-8 text-primary-foreground" />
+                <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Calendar className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2 text-foreground">Schedule a Demo</h3>
+                <h3 className="text-2xl font-bold mb-2 text-foreground">
+                  Schedule a <span className="text-green-500">VittSeva</span> Consultation
+                </h3>
                 <p className="text-muted-foreground">
-                  See our AI platform in action with a personalized demonstration
+                  Get personalized financial advice with our expert advisors
                 </p>
               </div>
 
               <div className="space-y-4 mb-8 w-full">
                 <div className="flex items-center gap-3 p-3 bg-card/60 rounded-lg border border-border">
-                  <Clock className="w-5 h-5 text-primary" />
+                  <Clock className="w-5 h-5 text-green-500" />
                   <div>
                     <p className="font-medium text-foreground">45-60 minutes</p>
-                    <p className="text-sm text-muted-foreground">Comprehensive demo</p>
+                    <p className="text-sm text-muted-foreground">Comprehensive financial review</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-3 p-3 bg-card/60 rounded-lg border border-border">
-                  <Video className="w-5 h-5 text-primary" />
+                  <Video className="w-5 h-5 text-blue-600" />
                   <div>
-                    <p className="font-medium text-foreground">Virtual meeting</p>
-                    <p className="text-sm text-muted-foreground">Online or on-site available</p>
+                    <p className="font-medium text-foreground">Virtual or In-person</p>
+                    <p className="text-sm text-muted-foreground">Flexible meeting options</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center gap-3 p-3 bg-card/60 rounded-lg border border-border">
-                  <Users className="w-5 h-5 text-primary" />
+                  <Users className="w-5 h-5 text-green-500" />
                   <div>
-                    <p className="font-medium text-foreground">Expert consultation</p>
-                    <p className="text-sm text-muted-foreground">Industry specialists</p>
+                    <p className="font-medium text-foreground">Expert Financial Advisors</p>
+                    <p className="text-sm text-muted-foreground">Specialized in your needs</p>
                   </div>
                 </div>
               </div>
@@ -307,20 +317,18 @@ export default function Contact() {
               <motion.a
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-primary text-primary-foreground px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
-                onClick={() => {
-                  window.open(CALENDLY_URL, "_blank")
-                }}
+                className="w-full bg-gradient-to-r from-green-500 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold flex items-center justify-center gap-2 hover:from-green-600 hover:to-blue-700 transition-colors"
+                href="mailto:info@vittseva.com?subject=Financial Consultation Request"
               >
                 <Calendar className="w-5 h-5" />
-                Request Demo
+                Book VittSeva Consultation
                 <ArrowRight className="w-4 h-4 ml-1" />
               </motion.a>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Bottom Section */}
+        {/* Bottom VittSeva CTA Section */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -329,7 +337,7 @@ export default function Contact() {
         >
           <motion.div
             variants={itemVariants}
-            className="relative text-center p-8 bg-primary rounded-2xl text-primary-foreground overflow-hidden"
+            className="relative text-center p-8 bg-gradient-to-r from-green-500 to-blue-600 rounded-2xl text-white overflow-hidden"
           >
             {/* Background Boxes */}
             <div className="absolute inset-0 w-full h-full">
@@ -337,34 +345,34 @@ export default function Contact() {
             </div>
             
             {/* Mask overlay to make boxes visible */}
-            <div className="absolute inset-0 w-full h-full bg-primary z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
+            <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-green-500 to-blue-600 z-20 [mask-image:radial-gradient(transparent,white)] pointer-events-none" />
             
             {/* Content */}
             <div className="relative z-30 h-full flex items-center justify-center pointer-events-none">
               <div className="max-w-fit mx-auto">
-                <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
+                <h3 className="text-2xl font-bold mb-4">
+                  Ready to Start Your <span className="text-green-100">VittSeva</span> Financial Journey?
+                </h3>
                 <p className="text-lg mb-6 max-w-2xl opacity-90">
-                  Join 500+ enterprise clients who trust Oxmaint AI to optimize their maintenance operations 
-                  and drive operational excellence.
+                  Join 2000+ satisfied clients who trust <span className="font-semibold text-green-100">VittSeva</span> to optimize their financial decisions 
+                  and achieve their wealth management goals with personalized advisory services.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pointer-events-auto">
                   <motion.a
-                    href={`mailto:${SALES_EMAIL}?subject=Sales Inquiry`}
+                    href="mailto:info@vittseva.com?subject=Financial Advisory Inquiry"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-card text-primary px-8 py-3 rounded-lg font-semibold hover:bg-accent transition-colors"
+                    className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
                   >
-                    Contact Sales
+                    Contact VittSeva Advisor
                   </motion.a>
                   <motion.a
+                    href="tel:+91141XXXXXXX"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="border-2 border-primary-foreground text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:bg-primary-foreground/10 transition-colors"
-                    onClick={() => {
-                      window.open(CALENDLY_URL, "_blank")
-                    }}
+                    className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
                   >
-                    Book Demo
+                    Call VittSeva Now
                   </motion.a>
                 </div>
               </div>
@@ -374,4 +382,4 @@ export default function Contact() {
       </div>
     </section>
   )
-} 
+}
