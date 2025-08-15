@@ -209,9 +209,9 @@ export default function Navigation() {
                 e.preventDefault()
                 handleNavClick("#home")
               }}
-              className="flex items-center space-x-3 text-lg font-bold"
+              className="flex items-center text-lg font-bold"
             >
-              <div className="w-14 h-14 rounded-lg flex items-center justify-center relative mr-4 bg-white/10 backdrop-blur-sm">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center bg-white/10 backdrop-blur-sm">
                 <Image 
                   src="/portal-logo/logo.png" 
                   alt="VittSeva Logo" 
@@ -221,9 +221,6 @@ export default function Navigation() {
                   priority
                 />
               </div>
-              <span className="text-primary">
-                VittSeva
-              </span>
             </a>
             
             <div className="ml-auto">
