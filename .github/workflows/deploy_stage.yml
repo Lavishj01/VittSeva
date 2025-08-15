@@ -1,0 +1,77 @@
+name: Deploy to Azure Oxmaint AI WebApp for Stage
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  build-and-deploy-stage:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Fetch environment variables from Azure WebApp
+        id: fetch-env
+        run: |
+          # Fetch app settings from Azure WebApp
+          ENV_VARS=$(az webapp config appsettings list \
+            --name ${{ secrets.WEBAPP_NAME_STAGE }} \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+            --output json)
+          
+          # Debug: Print the raw JSON response
+          echo "Raw ENV_VARS JSON:"
+          echo $ENV_VARS | jq '.'
+          
+          # Extract specific environment variables
+          NEXT_PUBLIC_ENVIRONMENT=$(echo $ENV_VARS | jq -r '.[] | select(.name=="NEXT_PUBLIC_ENVIRONMENT") | .value // "production"')
+          
+          # Debug: Print extracted values
+          echo "Extracted values:"
+          echo "NEXT_PUBLIC_ENVIRONMENT=$NEXT_PUBLIC_ENVIRONMENT"
+          
+          # Set as output variables
+          echo "NEXT_PUBLIC_ENVIRONMENT=$NEXT_PUBLIC_ENVIRONMENT" >> $GITHUB_OUTPUT
+
+      - name: Debug build args
+        run: |
+          echo "Build args that will be passed:"
+          echo "NEXT_PUBLIC_ENVIRONMENT=${{ steps.fetch-env.outputs.NEXT_PUBLIC_ENVIRONMENT }}"
+
+      - name: Log in to Azure Container Registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY }}.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build and push container image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ secrets.CONTAINER_NAME }}:${{ github.sha }}
+          file: ./Dockerfile
+          build-args: |
+            NEXT_PUBLIC_ENVIRONMENT=${{ steps.fetch-env.outputs.NEXT_PUBLIC_ENVIRONMENT }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.WEBAPP_NAME_STAGE }}
+          images: ${{ secrets.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ secrets.CONTAINER_NAME }}:${{ github.sha }}
+
+      - name: Azure logout
+        run: |
+          az logout

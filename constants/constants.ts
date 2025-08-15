@@ -1,0 +1,8 @@
+export const PORTAL_URL = "https://app.oxmaint.ai"
+export const CALENDLY_URL = "https://calendly.com/oxmaint-sales/30min"
+export const PHONE_NUMBER = "+14702099781"
+export const EMAIL = "contact@oxmaint.com"
+export const SALES_EMAIL = "sales@oxmaint.com"
+export const ADDRESS = "San Francisco Bay Area, CA"
+export const COMPANY_NAME = "Oxmaint"
+export const LINKEDIN_URL = "https://www.linkedin.com/company/oxmaint/"
